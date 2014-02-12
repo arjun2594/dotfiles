@@ -1,0 +1,40 @@
+
+#Applications
+alias em='emacs '
+alias ff='firefox'
+
+#Yum
+alias what='yum info'
+alias local-install='sudo yum localinstall -y'
+alias where='yum whatprovides'
+alias checkup='sudo yum check-update'
+alias update='sudo yum update'
+alias install='sudo yum -y install'
+
+#Other
+alias c='clear'
+alias e='exit'
+alias sx='startx'
+alias ..='cd ..'
+
+#Network
+alias pg='ping google.com'
+alias pm='ping 192.168.1.1'
+
+#List
+alias l='ls -CF'
+alias la='l -a'
+alias ll='l -lh'
+
+#Shutdown
+alias sr='sudo shutdown now -r'
+alias sd='sudo shutdown now -P'
+
+#USB
+alias um='sudo umount '
+alias mn='sudo mount '
+
+
+
+
+
