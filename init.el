@@ -73,20 +73,6 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:setup-keys t)
 
-; -== Ensime ==- (Change path manually) 
-;; Install scala-mode form ELPA. You need to install ensime separetly after that.
-;; This may help: http://jawher.net/2011/01/17/scala-development-environment-emacs-sbt-ensime/
-;;(require 'scala-mode)
-;;(add-to-list 'auto-mode-alist '("\.scala$" . scala-mode))
-;;(add-to-list 'load-path "/home/sibi/Downloads/Softwares/ensime_2.10.0-RC3-0.9.8.2/elisp/")
-;;(require 'ensime)
-;;(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-;;(push "/usr/bin" exec-path)
-;;(push "/home/sibi/Downloads/Softwares/sbt/bin/" exec-path)
-
-;; Rebind Meta key to C-x-m or C-c-m (more forgiving!)
-(global-set-key "\C-x\C-m" 'execute-extended-command)
-(global-set-key "\C-c\C-m" 'execute-extended-command)
 
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
@@ -96,8 +82,7 @@
 (global-set-key (kbd "C-x p") 'package-list-packages-no-fetch)
 
 (global-set-key "\C-t" 'goto-line)
-;; Haskell related
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
 ;;initialize maximized mode on startup
 (maximize)
 ;;initialize fullscreen at startup
