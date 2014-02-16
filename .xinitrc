@@ -19,7 +19,7 @@ xsetroot -solid midnightblue
  
 xscreensaver -no-splash &
 
-xloadimage -center -onroot -fullscreen /home/arjun/Downloads/1443974.png
+xloadimage -center -onroot -fullscreen /home/arjun/Pictures/Wallpapers/epicWall.jpg
  
 if [ -x /usr/bin/nm-applet ] ; then
    nm-applet &
