@@ -7,7 +7,7 @@ import qualified XMonad.StackSet as W
 import System.IO
 import Control.Monad
 
-myWorkspaces = ["main", "web", "chat", "dev", "media", "float", "misc"]
+myWorkspaces = ["main", "web", "dev","misc", "media", "float", "chat"]
 
 -- Define the workspace an application has to go to
 myManageHook = composeAll . concat $
@@ -18,6 +18,8 @@ myManageHook = composeAll . concat $
     , [ resource  =? c --> doF (W.shift "chat") | c <- myClassChatShifts ]
     , [ resource  =? c --> doF (W.shift "dev") | c <- myClassDevShifts ]
     , [ resource  =? c --> doF (W.shift "float") | c <- myClassFloatShifts ]
+    , [ resource  =? c --> doF (W.shift "misc") | c <- myClassMiscShifts ] 
+    , [ resource  =? c --> doF (W.shift "media") | c <- myClassMediaShifts ]  
     ]
     where
         viewShift = doF . liftM2 (.) W.greedyView W.shift
@@ -26,12 +28,15 @@ myManageHook = composeAll . concat $
         myClassDevShifts = ["emacs"]
         myClassFloatShifts = ["gimp"]
         myClassMiscShifts = ["nautilus"]
+	myClassMediaShifts = ["vlc"]
 
 main = do
+  
   xmproc <- spawnPipe "/bin/xmobar /home/arjun/.xmobarrc"
   xmonad $ defaultConfig
     {
-      manageHook = manageDocks <+> myManageHook
+      borderWidth = 0
+    , manageHook = manageDocks <+> myManageHook
                    <+> manageHook defaultConfig
     , layoutHook = avoidStruts  $  layoutHook defaultConfig
     , logHook = dynamicLogWithPP xmobarPP
@@ -39,6 +44,11 @@ main = do
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
     , modMask = mod4Mask     -- Rebind Mod to the Windows key
+    , startupHook = do
+        spawn "firefox"
+        spawn "emacs"
+        spawn "nautilus"
+        spawn "gnome-terminal"
     , workspaces = myWorkspaces
     , terminal = "gnome-terminal"
     } `additionalKeys`
@@ -46,6 +56,6 @@ main = do
     , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
     , ((0, xK_Print), spawn "scrot")
     ]
-
+    
 -- main = do
 --   xmonad $ defaultConfig
