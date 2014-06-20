@@ -9,7 +9,6 @@ source ~/.alias
 
 export ALTERNATE_EDITOR=emacs EDITOR=emacsclient VISUAL=emacsclient
 
-export PATH=${PATH}:~/bin:~/.cabal/bin
 
 ## http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
 export MARKPATH=$HOME/.marks
@@ -50,12 +49,12 @@ echo $NEWPWD
 
 ## Similar to bd, but the argument is a number
 function up () {
-        if [[ $# -eq 1 && "$1" -gt 0 ]] ; then
-local i d
+    if [[ $# -eq 1 && "$1" -gt 0 ]] ; then
+	    local i d
             for (( i = 0; i < $1; i++ )) ; do d="../$d" ; done
-cd $d
+	    cd $d
         else
-echo "Usage: up N"
+	    echo "Usage: up N"
         fi
     }
 
@@ -64,3 +63,19 @@ function mkcd () {
       mkdir -p "$*"
       cd "$*"
   }
+
+#create symlinks to executables in ~/.local/bin/
+
+function mkx () {
+    if [[ $# -gt 2 ]] ; then
+	echo "Usage: mkx Target Name <Symlink Name>"
+    else
+	if [[ $# -eq 1 ]] ; then
+	    ln -s $(pwd)/$1 ~/.local/bin/
+	else
+	    if [[ $# -eq 2 ]] ; then
+		ln -s $(pwd)/$1 ~/.local/bin/$2
+	    fi
+	fi
+    fi
+}

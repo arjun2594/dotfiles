@@ -13,18 +13,21 @@ myWorkspaces = ["main", "web", "dev","misc", "media", "float", "chat"]
 myManageHook = composeAll . concat $
     [
           -- Applications that go to web
-      [ className =? b --> viewShift "web"      | b <- myClassWebShifts  ]
+      [ className =? a --> doF (W.shift "web") | a <- myClassWebShifts  ]
          -- Applications that go to chat
+    , [ resource  =? b --> doF (W.shift "main") | b <- myClassMainShifts ]   
     , [ resource  =? c --> doF (W.shift "chat") | c <- myClassChatShifts ]
-    , [ resource  =? c --> doF (W.shift "dev") | c <- myClassDevShifts ]
-    , [ resource  =? c --> doF (W.shift "float") | c <- myClassFloatShifts ]
-    , [ resource  =? c --> doF (W.shift "misc") | c <- myClassMiscShifts ] 
-    , [ resource  =? c --> doF (W.shift "media") | c <- myClassMediaShifts ]  
+    , [ resource  =? d --> doF (W.shift "dev") | d <- myClassDevShifts ]
+    , [ resource  =? e --> doF (W.shift "float") | e <- myClassFloatShifts ]
+    , [ resource  =? f --> doF (W.shift "misc") | f <- myClassMiscShifts ] 
+    , [ resource  =? g --> doF (W.shift "media") | g <- myClassMediaShifts ]  
+   
     ]
     where
-        viewShift = doF . liftM2 (.) W.greedyView W.shift
+       --  viewShift = doF . liftM2 (.) W.greedyView W.shift
+        myClassMainShifts = ["gnome-terminal-server"]
         myClassWebShifts  = ["Firefox"]
-        myClassChatShifts = ["Pidgin" ]
+        myClassChatShifts = ["Irc"]
         myClassDevShifts = ["emacs"]
         myClassFloatShifts = ["gimp"]
         myClassMiscShifts = ["nautilus"]
