@@ -18,8 +18,8 @@
 (require 'ansi-color)
 (require 'recentf)
 (require 'package)
-(require 'google-this)
 
+;;Set package locations
 (setq package-archives
       '(("gnu"         . "http://elpa.gnu.org/packages/")
         ("original"    . "http://tromey.com/elpa/")
@@ -30,12 +30,27 @@
 ;;Initialize packages
 (package-initialize)
 
-;;Install zen-and-art theme
-(load-theme 'zen-and-art t)
+;;Initialize smex
+(require 'smex)
+(global-set-key "\M-x" 'smex)
+(smex-initialize)
+
+;;Load tango-dark theme
+(load-theme 'tango-dark t)
+
+;;Change the colour of the mode line
+(set-face-foreground 'mode-line "Green")
+(set-face-background 'mode-line "Ash")
 
 ;;Set ispell backends
 (setq ispell-program-name "aspell")
 (setq ispell-dictionary "british")
+
+;;emms
+(require 'emms-setup)
+(emms-standard)
+(emms-default-players)
+
 
 ;;Install Window-number mode - Use M-1,M-2 to jump between windows
 (require 'window-number)
@@ -48,65 +63,20 @@
 (ac-config-default)
 (autopair-global-mode) ;; enable autopair in all buffers
 
-;;Python Development Environment
-;; Install 3 Python dependencies: sudo pip install jedi elpy rope
-;; Install Emacs ELPA packages: elpy flymake-cursor
-(add-hook 'python-mode-hook 'elpy-mode)
-(highlight-indentation-mode -1)
-(add-hook 'python-mode-hook '(lambda ()
-  (local-set-key (kbd "RET") 'newline-and-indent)))
-(setenv "PYTHONPATH" "/usr/bin/python")
-
-;;C/C++ Development Enviroment
-;;Install ELPA packages: autocomplete and configure it (already done)
-;;Install ELPA packages: yasnippet iedit (Will done while installing elpy)
-;;Install ELPA packages: flymake-google-c++ && pip install cpplint
-;;Install ELPA package: google-c-style
-;;Install auto-complete-c-headers
-;;Install ELPA package yasnippet for snippet expansion
-(require 'yasnippet)
-(defun my:ac-c-header-init ()
-  (require 'auto-complete-c-headers)
-  (add-to-list 'ac-sources 'ac-source-c-headers)
- )
-(defun my:flymake-google-init () 
-  (require 'flymake-google-cpplint)
-  (flymake-google-cpplint-load)
-)
-
-(add-hook 'c-mode-hook 'my:ac-c-header-init)
-(add-hook 'c++-mode-hook 'my:ac-c-header-init)
-
-(add-hook 'c-mode-hook 'my:flymake-google-init)
-(add-hook 'c++-mode-hook 'my:flymake-google-init)
-
-; start google-c-style with emacs
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-
-;; Turn on semantic mode
-(semantic-mode 1)
-(defun my:add-semantic-to-autocomplete() 
-  (add-to-list 'ac-sources 'ac-source-semantic)
-)
-
-(add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
-
-;; ORG-MODE
-;; Spellcheck my org mode files.
-(add-hook 'org-mode-hook 'flyspell-mode)
-(add-hook 'org-mode-hook 'auto-fill-mode)
-
-;;Change the snippet expansion and iedit keybindings
-(define-key yas-minor-mode-map (kbd "C-c ;") 'yas-expand)
+;;i-edit mode
 (define-key global-map (kbd "C-c o") 'iedit-mode)
 
 
+;;Spellcheck my org mode files automatically
+(add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'org-mode-hook 'auto-fill-mode)
+
+;;Closing Timestamp for org-todo
+(setq org-log-done 'time)
+
+
 ;; Additional key-bindings
-(global-set-key "\C-w" 'backward-kill-word)
-(global-set-key "\C-x\C-k" 'kill-region)
-(global-set-key "\C-c\C-k" 'kill-region)
+
 (global-set-key (kbd "\C-x m") 'execute-extended-command)
 (global-set-key (kbd "\C-c m") 'execute-extended-command) 
 (global-set-key [f11] 'fullscreen)
@@ -124,19 +94,12 @@
 
 ;; Sometimes the above function may not work. (Gnome Shell 3.8)
 ;;initialize fullscreen at startup
-(fullscreen)
-
-(require 'powerline)
-(set-face-attribute 'mode-line nil
-                    :foreground "Black"
-                    :background "DarkOrange"
-                    :box nil)
-(powerline-default-theme)
-
-
 (defun switch-full-screen ()
   (interactive)
   (shell-command "wmctrl -r :ACTIVE: -btoggle,fullscreen"))
+
+(global-set-key [f11] 'switch-full-screen)
+(switch-full-screen)
 
 ;;Maximize Screen
 (defun maximize (&optional f)
@@ -145,25 +108,9 @@
 	    		 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
        (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
 	    		 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
+
+;;From the default configuration
 (custom-set-variables
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -175,3 +122,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
