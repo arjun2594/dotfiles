@@ -1,27 +1,31 @@
 
 #Applications
-alias em='emacs '
+alias em='emacs -Q -q -nw'
 alias ff='firefox'
 
 #Yum
-alias what='yum info'
-alias local-install='sudo yum localinstall -y'
-alias where='yum whatprovides'
-alias checkup='sudo yum check-update'
-alias update='sudo yum update'
-alias install='sudo yum -y install'
+#alias what='yum info'
+#alias local-install='sudo yum localinstall -y'
+#alias where='yum whatprovides'
+#alias checkup='sudo yum check-update'
+alias update='sudo apt-get update'
+alias install='sudo apt-get -y install'
 
 #Other
 alias c='clear'
 alias e='exit'
 alias sx='startx'
 alias ..='cd ..'
+alias sudo='sudo '
+alias rmtmp='rm ./*~'
+alias rmbkp='rm \#*\#'
 
 #Network
 alias pg='ping google.com'
 alias pm='ping 192.168.1.1'
 
 #List
+alias ls='ls --color=always'
 alias l='ls -CF'
 alias la='l -a'
 alias ll='l -lh'
@@ -33,8 +37,3 @@ alias sd='sudo shutdown now -P'
 #USB
 alias um='sudo umount '
 alias mn='sudo mount '
-
-
-
-
-

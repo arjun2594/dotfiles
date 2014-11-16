@@ -19,7 +19,7 @@ xsetroot -solid midnightblue
  
 xscreensaver -no-splash &
 
-xloadimage -center -onroot -fullscreen /home/arjun/Pictures/Wallpapers/epicWall.jpg
+xloadimage -center -onroot -fullscreen /home/arjun/Pictures/Wallpapers/write-code.png
  
 if [ -x /usr/bin/nm-applet ] ; then
    nm-applet &
@@ -29,6 +29,7 @@ if [ -x /usr/bin/gnome-power-manager ] ; then
    sleep 3
    gnome-power-manager &
 fi
- 
+
+syndaemon -i 1 -t -d 
 exec xmonad
 
