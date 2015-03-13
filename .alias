@@ -1,6 +1,6 @@
 
 #Applications
-alias em='emacs -Q -q -nw'
+alias em='emacs -Q -q -nw -l ~/.nw_init.el'
 alias ff='firefox'
 
 #Yum
@@ -8,8 +8,10 @@ alias ff='firefox'
 #alias local-install='sudo yum localinstall -y'
 #alias where='yum whatprovides'
 #alias checkup='sudo yum check-update'
+
 alias update='sudo apt-get update'
 alias install='sudo apt-get -y install'
+alias upgrade='sudo apt-get upgrade'
 
 #Other
 alias c='clear'
@@ -17,15 +19,18 @@ alias e='exit'
 alias sx='startx'
 alias ..='cd ..'
 alias sudo='sudo '
-alias rmtmp='rm ./*~'
-alias rmbkp='rm \#*\#'
+alias rmbkp='rm ./*~'
+alias rmtmp='rm \#*\#'
+alias j='jump'
+alias xcopy='xclip -selection clipboard'
+alias xpaste='xclip -o'
 
 #Network
 alias pg='ping google.com'
 alias pm='ping 192.168.1.1'
 
 #List
-alias ls='ls --color=always'
+alias ls='ls --color=auto'
 alias l='ls -CF'
 alias la='l -a'
 alias ll='l -lh'
