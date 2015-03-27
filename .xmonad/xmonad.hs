@@ -8,8 +8,9 @@ import System.IO
 import Control.Monad
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.ICCCMFocus
 
-myWorkspaces = ["main", "web", "dev","idea", "media", "misc", "float", "vbox"]
+myWorkspaces = ["main", "web", "dev","idea", "chat", "misc", "media", "float", "vbox"]
 
 -- Define the workspace an application has to go to
 myManageHook = composeAll . concat $
@@ -23,6 +24,7 @@ myManageHook = composeAll . concat $
     , [ resource  =? f --> doF (W.shift "misc") | f <- myClassMiscShifts ] 
     , [ resource  =? g --> doF (W.shift "media") | g <- myClassMediaShifts ]  
     , [ resource  =? g --> doF (W.shift "idea") | g <- myClassIdeaShifts ]  
+    , [ resource  =? g --> doF (W.shift "chat") | g <- myClassChatShifts ]
     ]
     where
        --  viewShift = doF . liftM2 (.) W.greedyView W.shift
@@ -33,7 +35,8 @@ myManageHook = composeAll . concat $
         myClassFloatShifts = ["gimp"]
         myClassMiscShifts = ["nautilus"]
 	myClassMediaShifts = ["vlc"]
-	myClassIdeaShifts = ["jetbrains-idea-ce"]	
+	myClassIdeaShifts = ["jetbrains-idea-ce", "sun-awt-X11-XFramePeer", "jetbrains-android-studio"]	
+        myClassChatShifts = ["Pidgin"]
 
 
 main = do
@@ -42,10 +45,11 @@ main = do
   xmonad $ defaultConfig
     {
       borderWidth = 0
+    , XMonad.focusedBorderColor = "grey"
     , manageHook = manageDocks <+> (isFullscreen --> doFullFloat) <+> myManageHook
                    <+> manageHook defaultConfig
     , layoutHook = avoidStruts  $  layoutHook defaultConfig
-    , logHook = dynamicLogWithPP xmobarPP
+    , logHook = takeTopFocus <+> dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
@@ -57,7 +61,9 @@ main = do
 	spawn "xmodmap ~/.dotfiles/.Xmodmap"
 	spawn "xrandr --output VGA1 --right-of DP1"
         spawn "xscreensaver &"
-	setWMName "LG3D"
+        spawn "xsetroot -cursor_name left_ptr"
+        spawn "feh --bg-fill /home/local/ANT/mutarjun/Pictures/Wallpapers/adwaita.jpg"
+        setWMName "LG3D"
     , workspaces = myWorkspaces
     , terminal = "gnome-terminal -e screen"
     } `additionalKeys` myKeys

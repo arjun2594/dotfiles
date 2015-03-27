@@ -9,7 +9,7 @@ source ~/.alias
 
 export ALTERNATE_EDITOR=emacs EDITOR=emacsclient VISUAL=emacsclient
 
-PATH=$PATH:/sbin/:/$HOME/.local/bin/
+PATH=$PATH:/sbin/
 export PATH
 
 ANDROID_HOME="$HOME/Android/Sdk/"

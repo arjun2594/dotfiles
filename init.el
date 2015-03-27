@@ -2,6 +2,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/scripts/")
 (load "~/.emacs.d/scripts/amz-search.el")
+
   
 ;; No splash-screen at the beginning, no menubar, scrollbar, toolbar, fringe
 (setq inhibit-splash-screen t)
@@ -114,7 +115,7 @@
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
+;;Fullscreen function
 (global-set-key [f11] 'fullscreen)
 (fullscreen)
 
@@ -132,7 +133,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("4eaad15465961fd26ef9eef3bee2f630a71d8a4b5b0a588dc851135302f69b16" "cd70962b469931807533f5ab78293e901253f5eeb133a46c2965359f23bfb2ea" "2b5aa66b7d5be41b18cc67f3286ae664134b95ccc4a86c9339c886dfd736132d" default))))
+ '(custom-safe-themes (quote ("4eaad15465961fd26ef9eef3bee2f630a71d8a4b5b0a588dc851135302f69b16" "cd70962b469931807533f5ab78293e901253f5eeb133a46c2965359f23bfb2ea" "2b5aa66b7d5be41b18cc67f3286ae664134b95ccc4a86c9339c886dfd736132d" default)))
+)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -171,3 +173,9 @@
            (process-name (concat "firefox " url))
            (process (apply 'start-process process-name nil
                            browse-url-firefox-program ff-args) )) ))
+
+
+;;mu4e configuration
+
+
+(load "~/.emacs.d/scripts/email.el")

@@ -85,7 +85,7 @@ bind 'b' focus bottom
 sorendition "+b kG"   
 
 # 2.2) hardstatus = navigation bar @ bottom
-hardstatus alwayslastline "%H %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"  
+hardstatus alwayslastline "%H %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %-=%C:%D,%d-%M-%Y"  
 
 # 2.3) Autoload two screen tabs for emacs/bash.
 screen -t bash 0

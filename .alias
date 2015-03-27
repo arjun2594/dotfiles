@@ -24,6 +24,9 @@ alias rmtmp='rm \#*\#'
 alias j='jump'
 alias xcopy='xclip -selection clipboard'
 alias xpaste='xclip -o'
+alias rm='rm -i '
+alias pidgin='NSS_SSL_CBC_RANDOM_IV=0 pidgin'
+alias fpc='sudo fuser -k 8000/tcp'
 
 #Network
 alias pg='ping google.com'
